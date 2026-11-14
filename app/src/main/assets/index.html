@@ -4,242 +4,283 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d19">
+<meta name="theme-color" content="#080b14">
 <title>Gmail Generator Premium</title>
+
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#080d19;color:#f1f5ff;
- font-family:Arial,sans-serif;padding:22px 16px;
+ margin:0;
+ padding:25px 18px;
+ min-height:100vh;
+ background:#080b14;
+ color:#f4f6ff;
+ font-family:Arial,sans-serif;
 }
 .container{max-width:520px;margin:auto}
-.header{display:flex;align-items:center;gap:12px;margin-bottom:30px}
-.logo{background:#153b75;color:#65b7ff;padding:13px;
- border-radius:14px;font-size:25px}
-.brand{font-weight:bold;letter-spacing:1px}
-.premium{margin-left:auto;color:#58b9ff;font-size:11px;
- border:1px solid #2875cb;padding:6px 9px;border-radius:20px}
-h1{font-size:29px;margin-bottom:8px}
-.subtitle{color:#93a5c0;font-size:14px;line-height:1.5}
-.panel{background:#111d30;border:1px solid #263751;
- border-radius:17px;padding:19px;margin-top:24px}
-label{display:block;color:#aebed5;font-size:12px;
- font-weight:bold;margin:17px 0 9px}
-input,select{
- width:100%;padding:15px;border:1px solid #344967;
- border-radius:10px;background:#1c2b42;color:white;
- font-size:15px;outline:none
+.header{text-align:center;margin:25px 0 32px}
+.logo{
+ width:65px;height:65px;margin:auto;
+ display:grid;place-items:center;
+ border-radius:20px;
+ background:linear-gradient(135deg,#087cff,#704cff);
+ font-size:30px;font-weight:bold;
+ box-shadow:0 0 35px #087cff55;
 }
-input:focus,select:focus{border-color:#3999ff}
+h1{font-size:25px;margin:17px 0 8px}
+.subtitle{color:#8994ad;font-size:13px}
+.card{
+ background:#111827;
+ border:1px solid #26344e;
+ border-radius:18px;
+ padding:20px;
+ margin-bottom:18px;
+}
+.label{
+ display:block;font-size:13px;
+ color:#b8c5df;margin-bottom:12px;
+ font-weight:bold;
+}
+.inputbox{
+ display:flex;align-items:center;
+ background:#080e1c;
+ border:1px solid #33435e;
+ border-radius:12px;padding:0 12px;
+}
+input{
+ width:100%;min-width:0;
+ background:transparent;border:0;
+ outline:none;color:white;
+ padding:16px 5px;font-size:16px;
+}
+.suffix{color:#8290aa;font-size:13px;white-space:nowrap}
+.counter{font-size:12px;color:#8795ae;text-align:right;margin-top:9px}
 button{
- border:0;border-radius:11px;padding:15px;
- font-size:14px;font-weight:bold;cursor:pointer
+ border:0;border-radius:11px;
+ padding:15px;font-size:14px;
+ font-weight:bold;cursor:pointer;
 }
-.generate{width:100%;background:#1677e8;color:white;
- margin-top:22px}
-.copyall{width:100%;background:#1677e8;color:white;
- margin-top:15px}
+.primary{
+ width:100%;color:white;
+ background:linear-gradient(100deg,#087cff,#694cff);
+ margin-top:18px;
+ box-shadow:0 5px 20px #087cff30;
+}
+.secondary{
+ background:#1d2b43;color:#dce8ff;
+ border:1px solid #344765;
+}
+button:disabled{opacity:.35;cursor:not-allowed}
+.result-head{
+ display:flex;justify-content:space-between;
+ align-items:center;gap:10px;
+ margin-bottom:15px;
+}
+.result-head h2{font-size:16px;margin:0}
+.count{color:#8294b5;font-size:12px}
 .result{
- background:#111d30;border:1px solid #263751;
- padding:14px;border-radius:11px;margin-top:10px;
- display:flex;align-items:center;justify-content:space-between;
- gap:8px;overflow-wrap:anywhere
+ background:#080e1c;
+ border:1px solid #26344e;
+ border-radius:10px;
+ padding:13px 10px;
+ margin-bottom:9px;
+ display:flex;align-items:center;
+ justify-content:space-between;gap:8px;
 }
-.result span{font-size:13px;overflow-wrap:anywhere}
-.copy{background:#203957;color:#70baff;padding:9px}
-.results-title{display:flex;justify-content:space-between;
- align-items:center;margin-top:28px}
-.count{color:#64b5ff;font-size:12px}
-.message{font-size:12px;margin-top:10px;color:#ff8585}
-.note{font-size:12px;color:#899bb5;line-height:1.6;
- margin-top:18px}
+.email{
+ font-size:12px;overflow-wrap:anywhere;
+ color:#dce8ff;
+}
+.copy{
+ padding:9px 11px;
+ color:#75b6ff;background:#172c49;
+ flex-shrink:0;font-size:12px;
+}
+.actions{display:flex;gap:9px;margin-top:14px}
+.actions button{flex:1}
+.notice{
+ color:#8290aa;font-size:12px;
+ line-height:1.6;margin-top:17px;
+}
 .hidden{display:none}
-footer{text-align:center;color:#60728e;font-size:11px;
- margin-top:30px}
+.footer{
+ text-align:center;color:#596781;
+ font-size:11px;margin:30px 0 15px;
+}
+.status{font-size:12px;color:#65b5ff;margin-top:12px}
 </style>
 </head>
+
 <body>
 <div class="container">
 
-<div class="header">
- <div class="logo">✉</div>
- <div class="brand">GMAIL GENERATOR</div>
- <div class="premium">PREMIUM</div>
-</div>
+<header class="header">
+ <div class="logo">G</div>
+ <h1>Gmail Generator <span style="color:#55a5ff">PRO</span></h1>
+ <div class="subtitle">Generador inteligente de variaciones Gmail</div>
+</header>
 
-<h1>Generador Gmail</h1>
-<p class="subtitle">
-Generá variaciones de tu dirección Gmail de manera rápida y sencilla.
-</p>
+<section class="card">
+ <label class="label" for="email">TU DIRECCIÓN DE GMAIL</label>
 
-<div class="panel">
- <label for="email">TU DIRECCIÓN DE GMAIL</label>
- <input id="email" type="text"
- placeholder="tucorreo@gmail.com"
- autocomplete="off">
-
- <div class="note">
- El nombre de usuario debe tener entre 2 y 20 caracteres.
+ <div class="inputbox">
+  <input id="email" type="text"
+   placeholder="tunombre"
+   maxlength="50"
+   autocomplete="off"
+   autocapitalize="none">
+  <span class="suffix">@gmail.com</span>
  </div>
 
- <label for="quantity">CANTIDAD DE VARIACIONES</label>
- <select id="quantity">
-  <option value="10">10 variaciones</option>
-  <option value="25">25 variaciones</option>
-  <option value="50">50 variaciones</option>
-  <option value="100" selected>100 variaciones</option>
-  <option value="250">250 variaciones</option>
-  <option value="500">500 variaciones</option>
- </select>
+ <div class="counter" id="counter">0 / 20 caracteres</div>
 
- <button class="generate" onclick="generate()">
- GENERAR VARIACIONES
+ <button class="primary" onclick="generate()">
+  GENERAR VARIACIONES
  </button>
- <div id="message" class="message"></div>
-</div>
 
-<div id="resultsSection" class="hidden">
- <div class="results-title">
-  <strong>Resultados generados</strong>
-  <span id="count" class="count"></span>
+ <div class="status" id="status"></div>
+</section>
+
+<section class="card hidden" id="results">
+ <div class="result-head">
+  <h2>Resultados generados</h2>
+  <span class="count" id="count"></span>
  </div>
- <div id="results"></div>
- <button class="copyall" onclick="copyAll()">
- COPIAR TODOS LOS RESULTADOS
- </button>
+
+ <div id="list"></div>
+
+ <div class="actions">
+  <button class="secondary" id="more" onclick="showMore()">
+   VER MÁS
+  </button>
+  <button class="secondary" onclick="copyVisible()">
+   COPIAR VISIBLES
+  </button>
+ </div>
+
+ <p class="notice" id="pageInfo"></p>
+</section>
+
+<div class="notice">
+ <strong>Información:</strong> Gmail permite variaciones mediante
+ puntos en direcciones personales @gmail.com. Todas las variantes
+ corresponden a la misma dirección de destino. Esto no se aplica
+ necesariamente a cuentas de Google Workspace.
 </div>
 
-<p class="note">
-Las variaciones con puntos no crean cuentas nuevas.
-Gmail normalmente entrega los mensajes en la misma
-bandeja de entrada de la cuenta original.
-</p>
+<footer class="footer">
+ GMAIL GENERATOR PREMIUM · ANDROID
+</footer>
 
-<footer>GMAIL GENERATOR PREMIUM</footer>
 </div>
 
 <script>
-let generated=[];
+const input=document.getElementById('email');
+const counter=document.getElementById('counter');
+const list=document.getElementById('list');
+const results=document.getElementById('results');
+const status=document.getElementById('status');
+
+let base='';
+let total=0;
+let current=0;
+const pageSize=100;
+
+input.addEventListener('input',()=>{
+ const clean=input.value.toLowerCase().replace(/@gmail\.com$/i,'');
+ counter.textContent=clean.replace(/\./g,'').length+' / 20 caracteres';
+});
 
 function generate(){
- const input=document.getElementById('email');
- const message=document.getElementById('message');
- const section=document.getElementById('resultsSection');
- const results=document.getElementById('results');
-
- message.textContent='';
- section.classList.add('hidden');
- results.innerHTML='';
-
  let value=input.value.trim().toLowerCase();
- let username=value;
+ value=value.replace(/@gmail\.com$/i,'');
+ value=value.replace(/\./g,'');
 
- if(value.includes('@')){
-  const parts=value.split('@');
-  if(parts.length!==2 || parts[1]!=='gmail.com'){
-   message.textContent='Ingresá una dirección @gmail.com válida.';
-   return;
-  }
-  username=parts[0];
- }
-
- if(username.length<2 || username.length>20){
-  message.textContent='El usuario debe tener entre 2 y 20 caracteres.';
+ if(!/^[a-z0-9]+$/.test(value)){
+  status.textContent='Usá solamente letras y números.';
   return;
  }
 
- if(!/^[a-z0-9.]+$/.test(username) ||
-    username.startsWith('.') ||
-    username.endsWith('.') ||
-    username.includes('..')){
-  message.textContent='Usá solamente letras, números y puntos válidos.';
+ if(value.length<2 || value.length>20){
+  status.textContent='El correo debe tener entre 2 y 20 caracteres.';
   return;
  }
 
- const base=username.replace(/\./g,'');
+ base=value;
+ total=Math.pow(2,base.length-1);
+ current=0;
+ list.innerHTML='';
+ results.classList.remove('hidden');
+ status.textContent='Generación preparada correctamente.';
+ document.getElementById('count').textContent=total.toLocaleString('es-AR')+' posibles';
+ render();
+}
 
- if(base.length<2 || base.length>20){
-  message.textContent='El usuario debe contener entre 2 y 20 caracteres.';
-  return;
+function makeVariant(number){
+ let output=base[0];
+
+ for(let i=1;i<base.length;i++){
+  if(number & (1<<(i-1))) output+='.';
+  output+=base[i];
  }
 
- const quantity=Number(document.getElementById('quantity').value);
- const total=1n << BigInt(base.length-1);
- generated=[];
- const seen=new Set();
+ return output+'@gmail.com';
+}
 
- for(let mask=0n;mask<total && generated.length<quantity;mask++){
-  let variant=base[0];
+function render(){
+ const end=Math.min(current+pageSize,total);
 
-  for(let i=1;i<base.length;i++){
-   if((mask & (1n << BigInt(i-1)))!==0n){
-    variant+='.';
-   }
-   variant+=base[i];
-  }
-
-  const email=variant+'@gmail.com';
-
-  if(!seen.has(email)){
-   seen.add(email);
-   generated.push(email);
-  }
- }
-
- generated.forEach((email,index)=>{
+ for(let i=current;i<end;i++){
+  const email=makeVariant(i);
   const row=document.createElement('div');
   row.className='result';
 
-  const span=document.createElement('span');
-  span.textContent=(index+1)+'. '+email;
+  const text=document.createElement('span');
+  text.className='email';
+  text.textContent=email;
 
   const button=document.createElement('button');
   button.className='copy';
   button.textContent='COPIAR';
-  button.onclick=()=>copyText(email,button);
+  button.onclick=()=>copyText(email);
 
-  row.appendChild(span);
+  row.appendChild(text);
   row.appendChild(button);
-  results.appendChild(row);
- });
+  list.appendChild(row);
+ }
 
- document.getElementById('count').textContent=
- generated.length+' resultados';
+ current=end;
 
- section.classList.remove('hidden');
+ document.getElementById('more').disabled=current>=total;
+ document.getElementById('pageInfo').textContent=
+  'Mostrando '+current.toLocaleString('es-AR')+
+  ' de '+total.toLocaleString('es-AR')+' variaciones.';
 }
 
-async function copyText(text,button){
- try{
-  await navigator.clipboard.writeText(text);
-  button.textContent='COPIADO';
-  setTimeout(()=>button.textContent='COPIAR',1500);
- }catch(e){
-  fallbackCopy(text);
-  button.textContent='COPIADO';
-  setTimeout(()=>button.textContent='COPIAR',1500);
+function showMore(){
+ render();
+}
+
+function copyText(text){
+ if(window.Android && window.Android.copyText){
+  window.Android.copyText(text);
+  return;
+ }
+
+ if(navigator.clipboard){
+  navigator.clipboard.writeText(text)
+   .then(()=>status.textContent='Correo copiado.');
+ }else{
+  status.textContent='No se pudo acceder al portapapeles.';
  }
 }
 
-async function copyAll(){
- if(!generated.length)return;
- try{
-  await navigator.clipboard.writeText(generated.join('\n'));
-  alert('Todos los resultados fueron copiados.');
- }catch(e){
-  fallbackCopy(generated.join('\n'));
- }
-}
+function copyVisible(){
+ const emails=[...document.querySelectorAll('.email')]
+  .map(element=>element.textContent).join('\n');
 
-function fallbackCopy(text){
- const area=document.createElement('textarea');
- area.value=text;
- document.body.appendChild(area);
- area.select();
- document.execCommand('copy');
- area.remove();
+ copyText(emails);
 }
 </script>
 </body>
-  </html>
-  
+</html>
